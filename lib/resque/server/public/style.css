@@ -89,3 +89,12 @@ body { padding:0; margin:0; }
 #failed tr.total td {background-color: #FFECEC; color: #D37474; font-size: 15px; font-weight: bold;}
 #failed .center {text-align: center;}
 #failed .failed_class { padding-left: 20px; font-size:12px; }
+
+.latency .arrow {
+  margin-left: 10px;
+  display: inline;
+  font-size: 125%;
+  font-weight: bold;
+}
+.latency .arrow.up { color: red; }
+.latency .arrow.down { color: green;}

@@ -49,4 +49,30 @@ Resque::Server.helpers do
     end
     classes
   end
+
+  ####################
+  #queues.erb helpers#
+  ####################
+  def format_latency(time_seconds)
+    return '0' if time_seconds == 0
+
+    time = Time.at(time_seconds)
+
+    time_format, time_unit = '', ''
+    if time.hour > 0
+      time_format, time_unit = '%H:', 'h'
+    end
+    if time_format.present?
+      time_format += '%M:'
+    elsif time.min > 0
+      time_format, time_unit = '%M:', 'm'
+    end
+    if time_format.present?
+      time_format += '%S'
+    elsif time.sec > 0
+      time_format, time_unit = '%1S.%1N', 's'
+    end
+    return '< 1s' unless time_format.present?
+    time.strftime("#{time_format}#{time_unit}")
+  end
 end
