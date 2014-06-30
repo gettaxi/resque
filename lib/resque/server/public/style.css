@@ -96,5 +96,14 @@ body { padding:0; margin:0; }
   font-size: 125%;
   font-weight: bold;
 }
-.latency .arrow.up { color: red; }
-.latency .arrow.down { color: green;}
+.latency .arrow.none::after { 
+  content: ' ';
+}
+.latency .arrow.up::after { 
+  content: '\2934';
+  color: red; 
+}
+.latency .arrow.down::after {
+  content: '\2935';
+  color: green;
+}
