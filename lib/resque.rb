@@ -211,6 +211,11 @@ module Resque
   #
   # Returns nothing
   def push(queue, item)
+    ########## GetTaxi Modification to add enqueued_at timestamp to each job (for queue latency)
+    item[:meta] = {
+      enqueued_at: Time.now.to_f
+    }
+    ############################################################################################
     redis.pipelined do
       watch_queue(queue)
       redis.rpush "queue:#{queue}", encode(item)
@@ -446,6 +451,15 @@ module Resque
       key.sub("#{redis.namespace}:", '')
     end
   end
+
+  ############ GetTaxi addition to determine queue latency ##########################################
+  def latency(queue)
+    top_job = peek(queue)
+    enqueued_at = top_job && top_job['meta'] && top_job['meta']['enqueued_at']
+    return (Time.now - enqueued_at).to_f if enqueued_at
+    0
+  end
+  ###################################################################################################
 
   private
 
