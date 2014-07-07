@@ -90,20 +90,20 @@ body { padding:0; margin:0; }
 #failed .center {text-align: center;}
 #failed .failed_class { padding-left: 20px; font-size:12px; }
 
-.latency .arrow {
+.arrow {
   margin-left: 10px;
-  display: inline;
   font-size: 125%;
   font-weight: bold;
 }
-.latency .arrow.none::after { 
-  content: ' ';
+.arrow.none::after { 
+  content: '\2194';
+  color: #C4953D;
 }
-.latency .arrow.up::after { 
+.arrow.up::after { 
   content: '\2934';
   color: red; 
 }
-.latency .arrow.down::after {
+.arrow.down::after {
   content: '\2935';
   color: green;
 }
