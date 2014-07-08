@@ -36,11 +36,12 @@
       <th>Latency</th>
     </tr>
     <% resque.queues.sort_by { |q| q.to_s }.each do |queue| %>
-    <% latency = resque.latency(queue) %>
+    <% size = resque.size queue %>
+    <% latency = resque.latency queue %>
     <tr>
       <td class='queue'><a class="queue" href="<%= u "queues/#{queue}" %>"><%= queue %></a></td>
-      <td class='size'><%= resque.size queue %></td>
-      <td class='latency' id='latency_<%= queue %>' data-latency='<%= latency %>'><%= format_latency(latency) %></td>
+      <td class='size with_arrow' id='size_<%= queue %>' data-value='<%= size %>'><%= size %></td>
+      <td class='latency with_arrow' id='latency_<%= queue %>' data-value='<%= latency %>'><%= format_latency(latency) %></td>
     </tr>
     <% end %>
     <% if failed_multiple_queues? %>
